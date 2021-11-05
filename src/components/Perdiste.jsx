@@ -1,16 +1,22 @@
-import React from 'react'
-import '../css/Contenedor.css'
-import { Contenedor } from './Contenedor'
 
-export const Perdiste = (props) => {
+import '../css/Instrucciones.css'
+import Modal from '@mui/material/Modal';
+import { useContext } from 'react';
+import { BancoContext } from '../context/BancoContext';
+
+export const Perdiste = () => {
+    const { modalPerdedor } = useContext(BancoContext)
     return (
-        <Contenedor>
-            <h1>¡Ups, has perdido!</h1>
-            <img className="imagen" src="https://img.icons8.com/clouds/100/000000/sad-ghost.png" alt="Perdiste" />
-            <div className="contendor-botones">
-                <button className="boton" >Ver respuestas Correctas</button>
-                <button className="boton" >Regresar a conferencia</button>
+        <Modal
+            open={modalPerdedor}
+        >
+            <div className="contenedor">
+                <img src='assets/Modal2.png' alt="Perdiste" className="Modal-imagen" />
+                <div className="Modal-botones">
+                    <img src='assets/SLIDE12/verRespuestas.png' alt="verRespuestas" className="Modal-boton" />
+                    <img src='assets/SLIDE12/regresar.png' alt="Regresar" className="Modal-boton" />
+                </div>
             </div>
-        </Contenedor>
+        </Modal>
     )
 }

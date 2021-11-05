@@ -1,43 +1,60 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { BancoContext } from "../context/BancoContext";
 import '../css/Preguntas.css'
 
+
 export const Preguntas = (props) => {
-    const { Acciones, respuestasUsuario, setRespuestasUsuario, contador, setContador, respuestasCorrectas } = useContext(BancoContext);
+    const {
+        respuestasUsuario, setRespuestasUsuario, contador, setContador, respuestasCorrectas,
+        setModalGanador, setModalPerdedor } = useContext(BancoContext);
+    const [btnPaloma, setBtnPaloma] = useState('/assets/PALOMA.png')
+    const [btnX, setBtnX] = useState('/assets/X.png')
 
     const handleOnRespuesta = (respueta) => {
-        if (contador === 10) {
-            console.log("entran en la primer condicion: " + contador);
-            const respuestasCopy = [...respuestasUsuario];
-            respuestasCopy.push(respueta);
-            console.log(respuestasCopy);
-            setRespuestasUsuario(respuestasCopy);
-            if (JSON.stringify(respuestasCorrectas) === JSON.stringify(respuestasCopy)) {
-                props.goToStep(13);
-            } else {
-                props.goToStep(12);
+        setTimeout(() => {
+            if (contador === 10) {
+                //sendMessageToFirebase(Acciones[props.numeroPregunta])
+                const respuestasCopy = [...respuestasUsuario];
+                respuestasCopy.push(respueta);
+                setRespuestasUsuario(respuestasCopy);
+                if (JSON.stringify(respuestasCorrectas) === JSON.stringify(respuestasCopy)) {
+                    setModalGanador(true);
+                } else {
+                    setModalPerdedor(true);
+                }
+            } else if (contador < 10) {
+                //sendMessageToFirebase(Acciones[props.numeroPregunta], props.numeroPregunta)
+                const respuestasCopy = [...respuestasUsuario];
+                respuestasCopy.push(respueta);
+                console.log(respuestasCopy + contador);
+                setRespuestasUsuario(respuestasCopy);
+                setContador(prev => prev + 1);
+                props.nextStep();
             }
-        } else if (contador < 10) {
-            console.log("entra en la segunda condicion: " + contador);
-            const respuestasCopy = [...respuestasUsuario];
-            respuestasCopy.push(respueta);
-            console.log(respuestasCopy);
-            setRespuestasUsuario(respuestasCopy);
-            setContador(prev => prev + 1);
-            props.nextStep();
-        }
+        }, 250);
     }
 
     return (
-        <div className="preguntas">
-            <p className="contador">{contador}/10</p>
-            <div className="pregunta">
-                <h5>{Acciones[props.numeroPregunta]}</h5>
-            </div>
+        <div className="fondo">
+            <img className="fondo-imagen" src={`/assets/fondo${props.numeroPregunta}.jpg`} alt="fondo" />
+            <img className="pregunta" src={`/assets/pregunta${props.numeroPregunta}.png`} alt="imagen" />
             <div className="respuestas">
-                <img onClick={() => handleOnRespuesta(true)} className="botonImagen" src='/assets/verdad.png' alt="verdadero" />
-                <img onClick={() => handleOnRespuesta(false)} className="botonImagen" src='/assets/Falso.png' alt="falso" />
+                <img onClick={() => {
+                    setBtnPaloma('/assets/PALOMA-SELECCION.png')
+                    handleOnRespuesta(true);
+                }}
+                    className="botonImagen"
+                    src={btnPaloma}
+                    alt="verdadero" />
+                <img onClick={() => {
+                    setBtnX('/assets/X-SELECCION.png')
+                    handleOnRespuesta(false)
+                }}
+                    className="botonImagen"
+                    src={btnX}
+                    alt="falso" />
             </div>
+            <img className="contador-imagen" src={`/assets/${props.numeroPregunta}_10.png`} alt="contador" />
         </div>
     )
 }

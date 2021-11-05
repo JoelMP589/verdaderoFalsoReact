@@ -1,0 +1,141 @@
+.contenedor {
+    display: grid;
+    width: 100%;
+    height: 100vh;
+    grid-gap: 10px;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns:repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+}
+
+.Modal-imagen{
+    grid-column-start: 1;
+    grid-column-end: 9;
+    grid-row-start: 1;
+    grid-row-end: 9;
+    max-width: 1000px;
+    height: auto;
+    position: relative;
+    z-index: -1;
+}
+
+.Modal-boton{
+    grid-column-start: 4;
+    grid-column-end: 6;
+    grid-row-start: 7;
+    position: relative;
+    width: 250px;
+    height: auto;
+    cursor: pointer;
+}
+
+.Modal-boton-cerrar{
+    grid-column-start: 4;
+    grid-column-end: 6;
+    grid-row-start: 6;
+    position: relative;
+    width: 250px;
+    height: auto;
+    cursor: pointer;
+}
+
+.Modal-botones{
+    grid-column-start: 2;
+    grid-column-end: 8;
+    grid-row-start: 7;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 1000px) {
+    .Modal-imagen{
+        max-width: 900px;
+    }
+
+    .Modal-boton{
+        width: 200px;
+    }
+    .Modal-boton-cerrar{
+        width: 200px;
+    }
+}
+
+@media (max-width: 900px) {
+    .Modal-imagen{
+        max-width: 850px;
+    }
+
+    .Modal-boton{
+        width: 190px;
+    }
+    .Modal-boton-cerrar{
+        width: 190px;
+    }
+}
+
+@media (max-width: 842px) {
+    .Modal-imagen{
+        max-width: 770px;
+    }
+
+    .Modal-boton{
+        width: 160px;
+    }
+    .Modal-boton-cerrar{
+        width: 160px;
+    }
+}
+@media (max-width: 750px) {
+    .Modal-imagen{
+        max-width: 600px;
+    }
+
+    .Modal-boton{
+        width: 160px;
+        grid-row-start: 6;
+    }
+    .Modal-boton-cerrar{
+        width: 160px;
+    }
+}
+
+@media (max-width: 750px) {
+    .Modal-imagen{
+        max-width: 600px;
+    }
+    .Modal-boton{
+        width: 160px;
+        grid-row-start: 6;
+    }
+}
+
+@media (max-height: 390px) {
+    .Modal-imagen{
+        max-width: 500px;
+    }
+    .Modal-boton{
+        width: 100px;
+        grid-row-start: 6;
+    }
+    .Modal-botones{
+    grid-column-start: 3;
+    grid-column-end: 7;
+    grid-row-start: 6;
+    width: 80%;;
+}
+.Modal-boton-cerrar{
+    width: 100px;
+    }
+}
+
+@media (max-height: 320px) {
+    .Modal-botones{
+    grid-column-start: 2;
+    grid-column-end: 8;
+    grid-row-start: 6;
+    width: 90%;;
+}
+}

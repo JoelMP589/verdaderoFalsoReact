@@ -1,21 +1,31 @@
 import { createContext, useState } from 'react';
+import firebase from 'firebase/compat/app';
+import "firebase/compat/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+
+firebase.initializeApp({
+    apiKey: "AIzaSyBPRp4xTpCcaUagaA5P_YBFsqyWc3_H-u0",
+    authDomain: "realtimetest-54cdd.firebaseapp.com",
+    projectId: "realtimetest-54cdd",
+    storageBucket: "realtimetest-54cdd.appspot.com",
+    messagingSenderId: "740465626710",
+    appId: "1:740465626710:web:0a69deffa710515d4b35f7",
+    measurementId: "G-L0KYEFY7F8"
+})
+
+const firestore = firebase.firestore();
 
 export const BancoContext = createContext();
 
 export const BancoProvider = ({ children }) => {
+    const messagesRef = firestore.collection("verdadOFalso");
+    const query = messagesRef.orderBy("createdAt").limit(25);
+    const [messages] = useCollectionData(query, { idField: "id" });
+    console.log(messages);
     const [contador, setContador] = useState(1);
-    const [Acciones] = useState(
-        ["Se debe negar a participar en discusiones con empresas competidoras sobre algún aspecto relativo a precios.",
-            "Es muy recomendable utilizar terceros autorizados o despachos para intercambiar información con competidores.",
-            "Es correcto reportar al interior de la compañía, el intento de sus competidores para discutir sobre acuerdos de precios.",
-            "Es recomendable discutir con un competidor los planes de marketing, estratégicos o de lanzamiento de productos.",
-            "Es viable intercambiar información relacionada a una licitación con competidores u otros postores.",
-            "Tener un programa de Compliance efectivo puede reducir las sanciones.",
-            "El hecho de haber sido sancionado por la comisión federal de competencia económica me exime de ser sancionado por otros entes gubernamentales.",
-            "Es válido recibir por parte de servidores públicos datos que no son de dominio público respecto a competidores.",
-            "Ante la imposición de una sanción o inicio de un proceso de investigación por parte de una entidad gubernamental es recomendable dar aviso a las empresas transnacionales con las que trabaja.",
-            "El incumplimiento y la imposición de sanciones impuestas por autoridades tales como la SFP comprende exclusivamente a actos de corrupción."
-        ]);
+    const [modalInstrucciones, setModalInstrucciones] = useState(true);
+    const [modalPerdedor, setModalPerdedor] = useState(false);
+    const [modalGanador, setModalGanador] = useState(false)
     const [respuestasCorrectas] = useState(
         [true,
             false,
@@ -30,14 +40,26 @@ export const BancoProvider = ({ children }) => {
         ])
     const [respuestasUsuario, setRespuestasUsuario] = useState([]);
 
+    const sendMessageToFirebase = async (mensaje) => {
+        await messagesRef.add({
+            text: mensaje,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+    }
     return (
         <BancoContext.Provider value={{
-            Acciones,
+            modalInstrucciones,
+            modalPerdedor,
+            modalGanador,
             respuestasCorrectas,
             respuestasUsuario,
             contador,
+            setModalInstrucciones,
+            setModalPerdedor,
+            setModalGanador,
             setRespuestasUsuario,
-            setContador
+            setContador,
+            sendMessageToFirebase
         }}>
             {children}
         </BancoContext.Provider>

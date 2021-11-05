@@ -1,17 +1,19 @@
-import React from 'react'
-import '../css/Contenedor.css'
-import { Contenedor } from './Contenedor'
+import '../css/Instrucciones.css'
+import Modal from '@mui/material/Modal';
+import { useContext } from 'react';
+import { BancoContext } from '../context/BancoContext';
 
-export const Ganador = (props) => {
+export const Ganador = () => {
+
+    const { modalGanador } = useContext(BancoContext)
     return (
-        <Contenedor>
-            <h1>¡Felicidades!</h1>
-            <p>
-                Acertaste en todas tus respuestas
-            </p>
-            <div className="contendor-botones">
-                <button className="boton" >Regresar a conferencia</button>
+        <Modal
+            open={modalGanador}
+        >
+            <div className="contenedor">
+                <img src='assets/Modal3.png' alt="Ganador" className="Modal-imagen" />
+                <img onClick={() => { }} src='/assets/SLIDE13/Cerrar.png' alt="Cerrar" className="Modal-boton-cerrar" />
             </div>
-        </Contenedor>
+        </Modal>
     )
 }
