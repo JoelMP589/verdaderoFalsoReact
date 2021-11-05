@@ -50,7 +50,7 @@ function App() {
         <h4>
           OOPS!
           <p></p>
-          FAVOR DE ROTAR SU DISPOSITIVO PARA PODER DISFRUTAR DE ESTA BODYAPP
+          FAVOR DE ROTAR SU DISPOSITIVO PARA PODER DISFRUTAR DE ESTE RETO
         </h4>
       </div>
     )
