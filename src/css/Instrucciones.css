@@ -5,15 +5,22 @@
     grid-gap: 10px;
     align-items: center;
     justify-items: center;
-    grid-template-columns:repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-columns:repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.contenedor-imagen{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 5;
 }
 
 .Modal-imagen{
-    grid-column-start: 1;
-    grid-column-end: 9;
-    grid-row-start: 1;
-    grid-row-end: 9;
     max-width: 1000px;
     height: auto;
     position: relative;
@@ -21,45 +28,43 @@
 }
 
 .Modal-boton{
-    grid-column-start: 4;
-    grid-column-end: 6;
-    grid-row-start: 7;
-    position: relative;
+    position:absolute;
     width: 250px;
     height: auto;
     cursor: pointer;
-}
-
-.Modal-boton-cerrar{
-    grid-column-start: 4;
-    grid-column-end: 6;
-    grid-row-start: 6;
-    position: relative;
-    width: 250px;
-    height: auto;
-    cursor: pointer;
+    top:370px;
+    z-index: 1;
 }
 
 .Modal-botones{
-    grid-column-start: 2;
-    grid-column-end: 8;
-    grid-row-start: 7;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: relative;
+    top:0px;
 }
 
-@media (max-width: 1000px) {
+
+.Modal-contenedor-botones{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    top:370px;
+    position: absolute;
+}
+
+ @media (max-width: 1000px) {
     .Modal-imagen{
         max-width: 900px;
     }
 
     .Modal-boton{
         width: 200px;
+        top:350px
     }
-    .Modal-boton-cerrar{
-        width: 200px;
+    .Modal-botones{
+    position: relative;
+    top:0px;
+}
+    .Modal-contenedor-botones{
+        top:350px
     }
 }
 
@@ -70,9 +75,14 @@
 
     .Modal-boton{
         width: 190px;
+        top:320px
     }
-    .Modal-boton-cerrar{
-        width: 190px;
+    .Modal-botones{
+    position: relative;
+    top:0px;
+}
+    .Modal-contenedor-botones{
+        top:320px
     }
 }
 
@@ -83,9 +93,14 @@
 
     .Modal-boton{
         width: 160px;
+        top:300px
     }
-    .Modal-boton-cerrar{
-        width: 160px;
+    .Modal-botones{
+    position: relative;
+    top:0px;
+}
+    .Modal-contenedor-botones{
+        top:300px
     }
 }
 @media (max-width: 750px) {
@@ -95,47 +110,31 @@
 
     .Modal-boton{
         width: 160px;
-        grid-row-start: 6;
+        top:220px
     }
-    .Modal-boton-cerrar{
-        width: 160px;
+    .Modal-botones{
+    position: relative;
+    top:0px;
+}
+    .Modal-contenedor-botones{
+        top:220px
     }
 }
 
-@media (max-width: 750px) {
-    .Modal-imagen{
-        max-width: 600px;
-    }
-    .Modal-boton{
-        width: 160px;
-        grid-row-start: 6;
-    }
-}
-
-@media (max-height: 390px) {
+@media (max-width: 600px) {
     .Modal-imagen{
         max-width: 500px;
     }
-    .Modal-boton{
-        width: 100px;
-        grid-row-start: 6;
-    }
-    .Modal-botones{
-    grid-column-start: 3;
-    grid-column-end: 7;
-    grid-row-start: 6;
-    width: 80%;;
-}
-.Modal-boton-cerrar{
-    width: 100px;
-    }
-}
 
-@media (max-height: 320px) {
+    .Modal-boton{
+        width: 120px;
+        top:180px
+    }
     .Modal-botones{
-    grid-column-start: 2;
-    grid-column-end: 8;
-    grid-row-start: 6;
-    width: 90%;;
+    position: relative;
+    top:0px;
 }
+    .Modal-contenedor-botones{
+        top:180px
+    }
 }

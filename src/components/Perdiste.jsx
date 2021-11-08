@@ -11,10 +11,12 @@ export const Perdiste = () => {
             open={modalPerdedor}
         >
             <div className="contenedor">
-                <img src='assets/Modal2.png' alt="Perdiste" className="Modal-imagen" />
-                <div className="Modal-botones">
-                    <img src='assets/SLIDE12/verRespuestas.png' alt="verRespuestas" className="Modal-boton" />
-                    <img src='assets/SLIDE12/regresar.png' alt="Regresar" className="Modal-boton" />
+                <div className="contenedor-imagen">
+                    <img src='assets/Modal2.png' alt="Perdiste" className="Modal-imagen" />
+                    <div className="Modal-contenedor-botones">
+                        <img src='assets/SLIDE12/verRespuestas.png' alt="verRespuestas" className="Modal-boton Modal-botones" />
+                        <img src='assets/SLIDE12/regresar.png' alt="Regresar" className="Modal-boton Modal-botones" />
+                    </div>
                 </div>
             </div>
         </Modal>

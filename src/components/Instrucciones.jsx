@@ -12,8 +12,10 @@ export const Instrucciones = () => {
             open={modalInstrucciones}
         >
             <div className="contenedor">
-                <img src='assets/Modal.png' alt="instrucciones" className="Modal-imagen" />
-                <img onClick={() => setModalInstrucciones(false)} src='/assets/SLIDE1/boton-comenzar.png' alt="Comenzar" className="Modal-boton" />
+                <div className="contenedor-imagen">
+                    <img src='assets/Modal.png' alt="instrucciones" className="Modal-imagen" />
+                    <img onClick={() => setModalInstrucciones(false)} src='/assets/SLIDE1/boton-comenzar.png' alt="Comenzar" className="Modal-boton" />
+                </div>
             </div>
         </Modal >
     )
