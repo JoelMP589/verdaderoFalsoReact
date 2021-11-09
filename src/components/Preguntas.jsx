@@ -6,24 +6,24 @@ import '../css/Preguntas.css'
 export const Preguntas = (props) => {
     const {
         respuestasUsuario, setRespuestasUsuario, contador, setContador, respuestasCorrectas,
-        setModalGanador, setModalPerdedor } = useContext(BancoContext);
+        setModalGanador, setModalPerdedor, sendMessageToFirebase } = useContext(BancoContext);
     const [btnPaloma, setBtnPaloma] = useState('/assets/PALOMA.png')
     const [btnX, setBtnX] = useState('/assets/X.png')
 
     const handleOnRespuesta = (respueta) => {
         setTimeout(() => {
             if (contador === 10) {
-                //sendMessageToFirebase(Acciones[props.numeroPregunta])
                 const respuestasCopy = [...respuestasUsuario];
                 respuestasCopy.push(respueta);
                 setRespuestasUsuario(respuestasCopy);
                 if (JSON.stringify(respuestasCorrectas) === JSON.stringify(respuestasCopy)) {
+                    sendMessageToFirebase('Ganador');
                     setModalGanador(true);
                 } else {
+                    sendMessageToFirebase('Perdedor');
                     setModalPerdedor(true);
                 }
             } else if (contador < 10) {
-                //sendMessageToFirebase(Acciones[props.numeroPregunta], props.numeroPregunta)
                 const respuestasCopy = [...respuestasUsuario];
                 respuestasCopy.push(respueta);
                 console.log(respuestasCopy + contador);

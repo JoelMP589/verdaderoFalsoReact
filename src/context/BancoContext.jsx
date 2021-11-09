@@ -1,7 +1,6 @@
 import { createContext, useState } from 'react';
 import firebase from 'firebase/compat/app';
 import "firebase/compat/firestore";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 
 firebase.initializeApp({
     apiKey: "AIzaSyBPRp4xTpCcaUagaA5P_YBFsqyWc3_H-u0",
@@ -18,10 +17,7 @@ const firestore = firebase.firestore();
 export const BancoContext = createContext();
 
 export const BancoProvider = ({ children }) => {
-    const messagesRef = firestore.collection("verdadOFalso");
-    const query = messagesRef.orderBy("createdAt").limit(25);
-    const [messages] = useCollectionData(query, { idField: "id" });
-    console.log(messages);
+    const verdadOFalsoRef = firestore.collection("verdadOFalso");
     const [contador, setContador] = useState(1);
     const [modalInstrucciones, setModalInstrucciones] = useState(true);
     const [modalPerdedor, setModalPerdedor] = useState(false);
@@ -40,12 +36,14 @@ export const BancoProvider = ({ children }) => {
         ])
     const [respuestasUsuario, setRespuestasUsuario] = useState([]);
 
-    const sendMessageToFirebase = async (mensaje) => {
-        await messagesRef.add({
-            text: mensaje,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        });
+    const sendMessageToFirebase = async (documento) => {
+        const increment = firebase.firestore.FieldValue.increment(1);
+        await verdadOFalsoRef.doc(documento).set({
+            Total: increment
+        },
+            { merge: true });
     }
+
     return (
         <BancoContext.Provider value={{
             modalInstrucciones,
