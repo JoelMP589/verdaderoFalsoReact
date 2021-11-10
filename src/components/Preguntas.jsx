@@ -6,7 +6,8 @@ import '../css/Preguntas.css'
 export const Preguntas = (props) => {
     const {
         respuestasUsuario, setRespuestasUsuario, contador, setContador, respuestasCorrectas,
-        setModalGanador, setModalPerdedor, sendMessageToFirebase } = useContext(BancoContext);
+        setModalGanador, setModalPerdedor,
+        sendMessageToFirebase, sendCorrectAnswersToFirebase, sendIncorrectAnswersToFirebase } = useContext(BancoContext);
     const [btnPaloma, setBtnPaloma] = useState('/assets/PALOMA.png')
     const [btnX, setBtnX] = useState('/assets/X.png')
 
@@ -15,6 +16,11 @@ export const Preguntas = (props) => {
             if (contador === 10) {
                 const respuestasCopy = [...respuestasUsuario];
                 respuestasCopy.push(respueta);
+                if (respuestasCorrectas[contador - 1] === respueta) {
+                    sendCorrectAnswersToFirebase(`pregunta${contador}`);
+                } else {
+                    sendIncorrectAnswersToFirebase(`pregunta${contador}`);
+                }
                 setRespuestasUsuario(respuestasCopy);
                 if (JSON.stringify(respuestasCorrectas) === JSON.stringify(respuestasCopy)) {
                     sendMessageToFirebase('Ganador');
@@ -26,7 +32,11 @@ export const Preguntas = (props) => {
             } else if (contador < 10) {
                 const respuestasCopy = [...respuestasUsuario];
                 respuestasCopy.push(respueta);
-                console.log(respuestasCopy + contador);
+                if (respuestasCorrectas[contador - 1] === respueta) {
+                    sendCorrectAnswersToFirebase(`pregunta${contador}`);
+                } else {
+                    sendIncorrectAnswersToFirebase(`pregunta${contador}`);
+                }
                 setRespuestasUsuario(respuestasCopy);
                 setContador(prev => prev + 1);
                 props.nextStep();

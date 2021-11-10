@@ -44,6 +44,22 @@ export const BancoProvider = ({ children }) => {
             { merge: true });
     }
 
+    const sendCorrectAnswersToFirebase = async (documento) => {
+        const increment = firebase.firestore.FieldValue.increment(1);
+        await verdadOFalsoRef.doc(documento).set({
+            Correcto: increment
+        },
+            { merge: true });
+    }
+
+    const sendIncorrectAnswersToFirebase = async (documento) => {
+        const increment = firebase.firestore.FieldValue.increment(1);
+        await verdadOFalsoRef.doc(documento).set({
+            Incorrecto: increment
+        },
+            { merge: true });
+    }
+
     return (
         <BancoContext.Provider value={{
             modalInstrucciones,
@@ -57,7 +73,9 @@ export const BancoProvider = ({ children }) => {
             setModalGanador,
             setRespuestasUsuario,
             setContador,
-            sendMessageToFirebase
+            sendMessageToFirebase,
+            sendCorrectAnswersToFirebase,
+            sendIncorrectAnswersToFirebase
         }}>
             {children}
         </BancoContext.Provider>
