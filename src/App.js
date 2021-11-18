@@ -4,6 +4,7 @@ import { Instrucciones } from './components/Instrucciones';
 import { Perdiste } from './components/Perdiste';
 import { Preguntas } from './components/Preguntas';
 import { useState, useEffect } from 'react';
+import { Respuestas } from './components/Respuestas';
 
 function App() {
   const [screenIsOnLandscape, setScreenIsOnLandscape] = useState(false);
@@ -23,13 +24,21 @@ function App() {
     isLandscape();
   }, []);
 
+  let noTransitions = {
+    enterRight: '',
+    enterLeft: '',
+    exitRight: '',
+    exitLeft: ''
+  };
+
   if (screenIsOnLandscape) {
     return (
       <>
         <Instrucciones />
         <Perdiste />
         <Ganador />
-        <StepWizard>
+        <Respuestas />
+        <StepWizard transitions={noTransitions}>
           <Preguntas numeroPregunta={1} />
           <Preguntas numeroPregunta={2} />
           <Preguntas numeroPregunta={3} />

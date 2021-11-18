@@ -21,7 +21,8 @@ export const BancoProvider = ({ children }) => {
     const [contador, setContador] = useState(1);
     const [modalInstrucciones, setModalInstrucciones] = useState(true);
     const [modalPerdedor, setModalPerdedor] = useState(false);
-    const [modalGanador, setModalGanador] = useState(false)
+    const [modalGanador, setModalGanador] = useState(false);
+    const [modalRespuestas, setModalRespuestas] = useState(false);
     const [respuestasCorrectas] = useState(
         [true,
             false,
@@ -68,6 +69,8 @@ export const BancoProvider = ({ children }) => {
             respuestasCorrectas,
             respuestasUsuario,
             contador,
+            modalRespuestas,
+            setModalRespuestas,
             setModalInstrucciones,
             setModalPerdedor,
             setModalGanador,
