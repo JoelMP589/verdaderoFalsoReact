@@ -32,9 +32,9 @@
     align-items: center;
     justify-content: center;
     padding: auto;
-    width: 450px;
+    width: 600px;
     height: auto;
-    margin-top: 40px;
+    margin-top: 60px;
 }
 
 .respuestas{
@@ -50,8 +50,8 @@
 }
 
 .botonImagen{
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     cursor: pointer;
 }
 

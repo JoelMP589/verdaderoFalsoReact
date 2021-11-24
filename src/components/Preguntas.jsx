@@ -1,6 +1,8 @@
 import { useContext, useState } from "react"
 import { BancoContext } from "../context/BancoContext";
 import '../css/Preguntas.css'
+import useSound from 'use-sound';
+import success from '../assets/acierto.mp3';
 
 
 export const Preguntas = (props) => {
@@ -10,6 +12,7 @@ export const Preguntas = (props) => {
         sendMessageToFirebase, sendCorrectAnswersToFirebase, sendIncorrectAnswersToFirebase } = useContext(BancoContext);
     const [btnPaloma, setBtnPaloma] = useState('/assets/PALOMA.png')
     const [btnX, setBtnX] = useState('/assets/X.png')
+    const [playSuccess] = useSound(success);
 
     const handleOnRespuesta = (respueta) => {
         setTimeout(() => {
@@ -52,6 +55,7 @@ export const Preguntas = (props) => {
                 <img onClick={() => {
                     setBtnPaloma('/assets/PALOMA-SELECCION.png')
                     handleOnRespuesta(true);
+                    playSuccess();
                 }}
                     className="botonImagen"
                     src={btnPaloma}
@@ -59,6 +63,7 @@ export const Preguntas = (props) => {
                 <img onClick={() => {
                     setBtnX('/assets/X-SELECCION.png')
                     handleOnRespuesta(false)
+                    playSuccess();
                 }}
                     className="botonImagen"
                     src={btnX}
